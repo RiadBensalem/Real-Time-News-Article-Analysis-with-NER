@@ -1,6 +1,6 @@
 # Real-Time-News-Article-Analysis-with-NER
 
-Description: In this project, I created a real-time data processing pipeline that ingests news articles, extracts named entities (e.g., organizations, people, locations), and performs analytics on the extracted information. The project showcases some skills in data engineering, real-time streaming, NER, and distributed computing.
+In this project, I created a real-time data processing pipeline that ingests news articles, extracts named entities (e.g., organizations, people, locations), and performs analytics on the extracted information. The project showcases some skills in data engineering, real-time streaming, NER, and distributed computing.
 
 ![Global Architecture](./images/architecture.png)
 
