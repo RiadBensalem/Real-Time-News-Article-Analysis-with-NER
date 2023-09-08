@@ -20,7 +20,7 @@ class Producer:
 
     def produce(self,message: str):
         try:
-            future=self.client.send(self.topic,key='key1',value=message)
+            future=self.client.send(self.topic,key='key1",value=message)
             _ = future.get(timeout=10)
             print(f"Successfully produced message to topic: {self.topic}")
 
@@ -30,8 +30,10 @@ class Producer:
 
 config = ProducerConfig()
 producer=Producer(config)
-
-producer.produce({'key1':str(sys.argv[1]),'key2':str(sys.argv[2])})
+if len(sys.argv)=3:
+    producer.produce({'key1':str(sys.argv[1]),'key2':str(sys.argv[2])})
+else:
+    print("params missing! Try adding a topic to")
 
 '''
 url = ('https://api.currentsapi.services/v1/latest-news?'
