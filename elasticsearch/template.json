@@ -1,0 +1,54 @@
+PUT _index_template/logs-news.currents
+{
+  "priority": 200,
+  "template": {
+    "settings": {
+      "index": {
+        "default_pipeline": "news-currents-api"
+      }
+    },
+    "mappings": {
+      "properties": {
+        "category": {
+          "type": "keyword"
+        },
+        "description": {
+          "type": "text"
+        },
+        "id": {
+          "type": "keyword"
+        },
+        "image": {
+          "type": "keyword"
+        },
+        "language": {
+          "type": "keyword"
+        },
+        "published": {
+          "type": "date"
+        },
+        "title": {
+          "type": "keyword",
+          "fields": {
+            "text": {
+              "type": "text"
+            }
+          }
+        },
+        "url": {
+          "type": "keyword"
+        },
+        "author": {
+          "type": "keyword"
+        }
+      }
+    }
+  },
+  "index_patterns": [
+    "logs-news.currents*"
+  ],
+  "data_stream": {},
+  "composed_of": [
+    "logs-mappings"
+  ]
+}

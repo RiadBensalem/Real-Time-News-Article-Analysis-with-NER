@@ -20,7 +20,7 @@ class Producer:
 
     def produce(self,message: str):
         try:
-            future=self.client.send(self.topic,key='key1",value=message)
+            future=self.client.send(self.topic,key="key1",value=message)
             _ = future.get(timeout=10)
             print(f"Successfully produced message to topic: {self.topic}")
 
@@ -30,19 +30,25 @@ class Producer:
 
 config = ProducerConfig()
 producer=Producer(config)
-if len(sys.argv)=3:
-    producer.produce({'key1':str(sys.argv[1]),'key2':str(sys.argv[2])})
-else:
-    print("params missing! Try adding a topic to")
+'''
+with open("response.json","r") as f:
+        content=f.read()
+        dic=json.loads(content)
+        for n in dic["news"]:
+            producer.produce(n)
 
 '''
-url = ('https://api.currentsapi.services/v1/latest-news?'
-        'language=us&'
-        'apiKey=cd3z0FOSqIjCrME5cm2xBLQJheDxSdoDoW2xB1WqjOe_zPN2')
-response = requests.get(url)   
 
+topic=str(sys.argv[1])
+url = ('https://api.currentsapi.services/v1/search?'
+        'keywords='+topic+'&language=en&'
+        'apiKey=API_TOKEN')
+response = requests.get(url)   
+print("======================")
+print(response)
+print("======================")
 news=response.json()["news"] 
 for new in news:
     producer.produce(new)
-'''
+
 

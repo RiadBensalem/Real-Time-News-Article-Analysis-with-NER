@@ -1,0 +1,56 @@
+PUT _ingest/pipeline/news-currents-api
+{
+  "description": "Apply NER on News",
+  "processors": [
+    {
+      "inference": {
+        "model_id": "elastic__distilbert-base-uncased-finetuned-conll03-english",
+        "field_map": {
+          "title": "text_field"
+        },
+        "target_field": "ml.ner"
+      }
+    },
+    {
+      "date": {
+        "field": "published",
+        "formats": [
+          "YYYY-mm-dd HH:MM:ss"
+        ],
+        "ignore_failure": true,
+        "target_field": "published"
+      }
+    },
+    {
+      "date": {
+        "field": "_ingest.timestamp",
+        "target_field": "@timestamp",
+        "formats": [
+          "ISO8601"
+        ]
+      }
+    },
+    {
+      "script": {
+        "if": "return ctx['ml']['ner'].containsKey('entities')",
+        "source": "Map tags = new HashMap(); for (item in ctx['ml']['ner']['entities']) { if (!tags.containsKey(item.class_name)) tags[item.class_name] = new HashSet(); tags[item.class_name].add(item.entity);} ctx['tags'] = tags;"
+      }
+    }
+  ],
+  "on_failure": [
+    {
+      "set": {
+        "description": "Index document to 'failed-<index>'",
+        "field": "_index",
+        "value": "failed-{{{ _index }}}"
+      }
+    },
+    {
+      "set": {
+        "description": "Set error message",
+        "field": "ingest.failure",
+        "value": "{{_ingest.on_failure_message}}"
+      }
+    }
+  ]
+}
