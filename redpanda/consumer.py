@@ -4,9 +4,9 @@ from kafka import KafkaConsumer
 from elasticsearch import Elasticsearch
 import json
 
-cloud_id = "My_deployment:dXMtY2V..."
+cloud_id = "My_deployment:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvOjQ0MyQyYWI4YzNjMGZkYzg0Y2U5YTFiODQ1OWY2N2IwMGUyYSRjNjJjZTJiNjU0NTg0MjczODc2MzZhY2Y0ZmU4MDViNA=="
 username = "elastic"
-password = "PWD"
+password = "Cjf9RjSRGOmZoqqzc7YY4I6m"
 data_stream_name = "logs-news.currents-default"
 es = Elasticsearch(
     cloud_id=cloud_id,

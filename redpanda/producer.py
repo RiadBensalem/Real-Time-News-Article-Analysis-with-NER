@@ -42,7 +42,7 @@ with open("response.json","r") as f:
 topic=str(sys.argv[1])
 url = ('https://api.currentsapi.services/v1/search?'
         'keywords='+topic+'&language=en&'
-        'apiKey=API_TOKEN')
+        'apiKey=HZQXh_fInkxT7cOv6NTCgGCIlBS-sxVkQ0KaMFZ0La9gflET')
 response = requests.get(url)   
 print("======================")
 print(response)
